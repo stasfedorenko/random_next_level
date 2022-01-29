@@ -1,7 +1,6 @@
 package com.random.helperClass;
 
 import com.random.entity.Student;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -15,65 +14,42 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelHelper {
-    //name of sheet in Excel file
-    static String SHEET = "Students";
+    enum CellsEnum {
+        ID,
+        NAME,
+        SURNAME,
+    }
 
-    //TODO зарефакторить
+    //TODO refactor/replace switch statement (done!)
     public static List<Student> excelToStudent() {
-        try {
-            String path = new File("src/main/resources/templates/students.xlsx").getAbsolutePath();
-            FileInputStream fis = new FileInputStream(path);
-            Workbook workbook = new XSSFWorkbook(fis);
+        final String SHEET = "Students";
+        try (FileInputStream fis = new FileInputStream(
+                new File("src/main/resources/templates/students.xlsx").getAbsolutePath());
+             Workbook workbook = new XSSFWorkbook(fis)) {
 
             Sheet sheet = workbook.getSheet(SHEET);
             Iterator<Row> rows = sheet.iterator();
 
             List<Student> students = new ArrayList<>();
 
-            int rowNumber = 0;
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
 
                 // skip header
-                if (rowNumber == 0) {
-                    rowNumber++;
+                if (currentRow.getRowNum() == 0) {
                     continue;
                 }
 
-                Iterator<Cell> cellsInRow = currentRow.iterator();
-
                 Student student = new Student();
-
-                int cellIdx = 0;
-                while (cellsInRow.hasNext()) {
-                    Cell currentCell = cellsInRow.next();
-
-                    switch (cellIdx) {
-                        case 0:
-                            student.setB_teamId((int) currentCell.getNumericCellValue());
-                            break;
-
-                        case 1:
-                            student.setC_name(currentCell.getStringCellValue());
-                            break;
-
-                        case 2:
-                            student.setD_surname(currentCell.getStringCellValue());
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    cellIdx++;
-                }
+                //adding fields to Student
+                student.setB_teamId((int) currentRow.getCell(CellsEnum.ID.ordinal()).getNumericCellValue());
+                student.setC_name(currentRow.getCell(CellsEnum.NAME.ordinal()).getStringCellValue());
+                student.setD_surname(currentRow.getCell(CellsEnum.SURNAME.ordinal()).getStringCellValue());
 
                 students.add(student);
             }
-
-            workbook.close();
-
             return students;
+
         } catch (IOException e) {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
         }
