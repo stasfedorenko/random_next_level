@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="late_container">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>surname</th>
+                <th>Return button</th>
+            </tr>
+            <tr th:each="student : ${allStudents2}">
+                <td th:text="${student.a_id}"></td>
+                <td th:text="${student.c_name}"></td>
+                <td th:text="${student.d_surname}"></td>
+                <td>
+                    <div class="right">
+                        <form id="returnButton" th:action="@{/random/returnsStudent}" th:object="${student}" th:method="post">
+                            <input type="hidden" th:value="${student.a_id}" name="id"/>
+                            <div class="row">
+                                <button type="submit" value="Восстановить" class="revert">Восстановить</button>
+                            </div>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <button onclick="window.location.href='/random/main';" class="backButton">Назад</button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+    font-family: Verdana, serif;
+    font-size: 14px;
+    background-image: url("../img/lowpoly.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+}
+
+.container div.main_container {
+    padding: 40px;
+    background: rgba(240, 248, 255, 0.5);
+    border-radius: 20px;
+}
+
+.container div.lesson_container {
+    padding: 50px;
+    background: rgba(240, 248, 255, 0.3);
+    border-radius: 15px;
+}
+
+.lesson_container form#backButton{
+    float:left;
+}
+
+
+.container div.late_container {
+    width: 500px;
+    padding: 40px;
+    background: rgba(240, 248, 255, 0.5);
+    border-radius: 20px;
+}
+tbody{
+    width: 100%;
+}
+.late_container td div.right{
+    position:relative;
+    width: 100%;
+    height: 100%;
+
+}
+th{
+    text-align: center;
+}
+
+.container div.add_student {
+    float:left;
+    padding: 40px;
+    background: rgba(240, 248, 255, 0.5);
+    border-radius: 20px;
+}
+.container div.add_student .field {
+    padding: 7px;
+}
+
+.container div div.row{
+   padding: 0;
+}
+
+.container div table tbody tr td form{
+    width: 40px;
+    padding: 0;
+}
+
+table{
+    margin: 0 auto;
+    border-spacing: 20px 20px;
+}
+td{
+    text-align:center;
+}
+
+
+input[type=submit] {
+    width: 100%;
+    text-align: center;
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+input[type=file]{
+    padding:30px;
+}
+
+#congratulations{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+button{
+    cursor:pointer;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button.revert{
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+}
+button.add{
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+}
+
+button.backButton{
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+}
+
+button.absent{
+    background-color: red;
+    color: white;
+    padding: 5px 5px;
+    font-size: 14px;
+    border-radius: 12px;
+}
+
+button.start{
+    float:right;
+    background-color: #1E5945;
+    color: white;
+    padding: 15px 32px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.header{
+    text-align: center;
+}
+
+.field {
+    clear:both;
+    text-align:right;
+    line-height:35px;
+}
+label {
+    float:left;
+    padding-right:20px;
+}

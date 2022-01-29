@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="lesson_container">
+        <h2 class="header">Random</h2>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>surname</th>
+                <th>isPresent</th>
+            </tr>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.a_id}"></td>
+                <td th:text="${student.c_name}"></td>
+                <td th:text="${student.d_surname}"></td>
+                <td th:text="${student.e_isPresent}"></td>
+                <td>
+                    <form id="markButton" th:action="@{/random/marksStudent}" th:object="${student}" th:method="post">
+                        <input type="hidden" th:value="${student.a_id}" name="id"/>
+                        <div class="row">
+                            <button type="submit" value="Оценить">Оценить</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <div class="field">
+            <form id="backButton" th:action="@{/random/main}" th:method="get">
+                <button type="submit" value="Назад" class="backButton">Назад</button>
+            </form>
+
+            <form id="randomButton" th:action="@{/random/student}" th:method="get">
+                <button type="submit" value="Выбрать" class="add">Выбрать</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

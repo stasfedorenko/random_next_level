@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Application</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="main_container">
+        <h2 class="header">All Students</h2>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>id команды</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Присутствует?</th>
+            </tr>
+            <tr th:each="student : ${allStudents}">
+                <td th:text="${student.a_id}"></td>
+                <td th:text="${student.b_teamId}"></td>
+                <td th:text="${student.c_name}"></td>
+                <td th:text="${student.d_surname}"></td>
+                <td>
+                    <form id="deleteButton" th:action="@{/random/deleteStudent}" th:object="${student}" th:method="post">
+                        <input type="hidden" th:value="${student.a_id}" name="id"/>
+                        <div class="row">
+                            <button type="submit" value="Отсутствует" class="absent">Отсутствует</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <th>
+                    <button onclick="window.location.href='/random/addNewStudent';" class="add">Добавить</button>
+                </th>
+                <th>
+                    <button onclick="window.location.href='/random/late';" class="revert">Вернуть</button>
+                </th>
+            </tr>
+        </table>
+        <button onclick="window.location.href='/random/studentsLesson';" class="start">Старт</button>
+    </div>
+</div>
+</body>
+</html>

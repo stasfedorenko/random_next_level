@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Оцените студента</title>
+</head>
+<body>
+<form action="/random/markedStudent"  method="post">
+<label>Дополнительная оценка:</label>
+<input type="text"  name="f_mark">
+<br><br>
+<label>Оценка за вопрос:</label>
+<input type="text"  name="g_ansMark">
+<br><br>
+<label>Оценка за ответ:</label>
+<input type="text"  name="k_qMark">
+<br><br>
+    <input type="hidden" th:value="${studentMark.a_id}" name="studentMark"/>
+    <input type="submit" value="Оценить">
+</form>
+<br><br>
+<button onclick="window.location.href='/random/studentsLesson';">Назад</button>
+</body>
+</html>

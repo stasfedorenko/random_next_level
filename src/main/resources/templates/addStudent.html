@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding student</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="add_student">
+        <h2 class="header">New student</h2>
+        <br>
+        <form action="/random/saveStudent" method="post">
+            <input type="hidden" name="id">
+            <div class="field">
+                <label for="b_teamId">Команда</label>
+                <input type="text" name="b_teamId" id="b_teamId">
+            </div>
+
+            <div class="field">
+                <label for="c_name">Имя</label>
+                <input type="text" name="c_name" id="c_name">
+            </div>
+
+            <div class="field">
+                <label for="d_surname">Фамилия</label>
+                <input type="text" name="d_surname" id="d_surname">
+            </div>
+
+            <input type="hidden" name="isPresent">
+            <input type="hidden" name="mark">
+            <input type="hidden" name="ansMark">
+            <input type="hidden" name="qMark">
+            <input type="hidden" name="isAnswer">
+            <input type = "submit" value = "Добавить">
+        </form>
+        <br>
+        <button onclick="window.location.href='/random/main';" class="backButton">Назад</button>
+    </div>
+</div>
+</body>
+</html>
