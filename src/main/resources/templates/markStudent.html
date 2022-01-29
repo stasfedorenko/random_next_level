@@ -1,24 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Оцените студента</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<form action="/random/markedStudent"  method="post">
-<label>Дополнительная оценка:</label>
-<input type="text"  name="f_mark">
-<br><br>
-<label>Оценка за вопрос:</label>
-<input type="text"  name="g_ansMark">
-<br><br>
-<label>Оценка за ответ:</label>
-<input type="text"  name="k_qMark">
-<br><br>
-    <input type="hidden" th:value="${studentMark.a_id}" name="studentMark"/>
-    <input type="submit" value="Оценить">
-</form>
-<br><br>
-<button onclick="window.location.href='/random/studentsLesson';">Назад</button>
+<div class="container">
+    <div class="mark_container">
+        <form th:action="@{/random/markedStudent/}"  method="post">
+
+            <div class="field">
+                <label for="f_mark">Дополнительная оценка:</label>
+                <input type="text"  name="f_mark" id="f_mark">
+            </div>
+
+            <div class="field">
+                <label for="g_ansMark">Оценка за вопрос:</label>
+                <input type="text"  name="g_ansMark" id="g_ansMark">
+            </div>
+
+            <div class="field">
+                <label for="k_qMark">Оценка за ответ:</label>
+                <input type="text"  name="k_qMark" id="k_qMark">
+            </div>
+
+            <input type="hidden" th:value="${studentMark.a_id}" name="studentMark"/>
+            <input type="submit" class="start" value="Оценить">
+        </form>
+
+        <button onclick="window.location.href='/random/studentsLesson';" class="backButton">Назад</button>
+    </div>
+</div>
 </body>
 </html>
