@@ -16,6 +16,7 @@
                 <th>name</th>
                 <th>surname</th>
                 <th>isPresent</th>
+                <th></th>
             </tr>
             <tr th:each="student : ${students}">
                 <td th:text="${student.a_id}"></td>
@@ -23,12 +24,14 @@
                 <td th:text="${student.d_surname}"></td>
                 <td th:text="${student.e_isPresent}"></td>
                 <td>
-                    <form id="markButton" th:action="@{/random/marksStudent}" th:object="${student}" th:method="post">
-                        <input type="hidden" th:value="${student.a_id}" name="id"/>
-                        <div class="row">
-                            <button type="submit" value="Оценить">Оценить</button>
-                        </div>
-                    </form>
+                    <div class="right">
+                        <form th:action="@{/random/marksStudent}" th:object="${student}" th:method="post">
+                            <input type="hidden" th:value="${student.a_id}" name="id"/>
+                            <div class="row">
+                                <button type="submit" value="Оценить" id="markButton">Оценить</button>
+                            </div>
+                        </form>
+                    </div>
                 </td>
             </tr>
         </table>
