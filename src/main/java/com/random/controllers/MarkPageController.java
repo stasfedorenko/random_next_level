@@ -5,7 +5,6 @@ import com.random.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,12 +31,7 @@ public class MarkPageController {
     public String markedStudent(@RequestParam("studentMark") int id, @RequestParam("f_mark") double f_mark,
                                 @RequestParam("g_ansMark") double g_ansMark,
                                 @RequestParam("k_qMark") double k_qMark) {
-        Student student = studentService.getStudent(id);
-        System.out.println(student);
-        student.setF_mark(f_mark);
-        student.setG_ansMark(g_ansMark);
-        student.setK_qMark(k_qMark);
-        studentService.saveStudent(student);
+        studentService.changeMark(id, f_mark, g_ansMark, k_qMark);
         return "redirect:/random/secondMainPage";
     }
 }

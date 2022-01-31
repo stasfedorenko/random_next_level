@@ -4,6 +4,7 @@ package com.random.service;
 import com.random.DAO.StudentDAO;
 import com.random.entity.Student;
 import com.random.helperClass.ExcelHelper;
+import com.random.helperClass.RandomHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.*;
 @Service
 public class StudentServiceImpl implements StudentService {
     StudentDAO studentDAO;
+    List<Student> allStudents = new ArrayList<>();
 
     @Autowired
     public StudentServiceImpl(StudentDAO studentDAO) {
@@ -22,17 +24,33 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getAllStudents() {
-        return studentDAO.findAllisPresentTrue();
+        return studentDAO.findAllisPresent();
     }
 
     @Override
     public List<Student> getAllStudents2() {
-        return studentDAO.findAllisPresentTrueAndAnswerFalse();
+        List<Student> students = studentDAO.findAllisPresentTrueAndAnswerFalse();
+        if (!students.isEmpty()) {
+            Student student = RandomHelper.randomId(students);
+            student.setL_isAnswer(true);
+            studentDAO.save(student);
+            allStudents.add(student);
+        }
+        return allStudents;
+    }
+
+    @Override
+    public void changeMark(int id, double f_mark, double g_ansMark, double k_qMark) {
+        Student student = studentDAO.getById(id);
+        student.setF_mark(student.getF_mark() + f_mark);
+        student.setG_ansMark(student.getG_ansMark() + g_ansMark);
+        student.setK_qMark(student.getK_qMark() + k_qMark);
+        studentDAO.save(student);
     }
 
     @Override
     public List<Student> getAllLateStudents() {
-        return studentDAO.findAllisPresentFalse();
+        return studentDAO.findAllisNotPresent();
     }
 
     @Override
@@ -42,27 +60,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteStudent(int id) {
-        studentDAO.deleteById(id);
-    }
-
-    @Override
     public void saveStudent(Student student) {
         studentDAO.save(student);
-    }
-
-    @Override
-    public void saveStudents(List<Student> student) {
-        studentDAO.saveAll(student);
-    }
-
-    @Override
-    public int save() {
-        List<Student> list = studentDAO.findAllisPresentTrue();
-        Random random = new Random();
-        int id = random.ints(1, list.size()).findFirst().getAsInt();
-
-        return id;
     }
 
     @Override
@@ -70,10 +69,5 @@ public class StudentServiceImpl implements StudentService {
         return studentDAO.findAllisPresentTrueAndAnswerTrue();
     }
 
-    @Override
-    public int getRandomId() {
-        Random random = new Random();
-        return random.ints(1, 9).findFirst().getAsInt();
-    }
 
 }

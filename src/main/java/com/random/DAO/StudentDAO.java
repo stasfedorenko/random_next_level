@@ -11,13 +11,16 @@ import java.util.List;
 @Repository
 public interface StudentDAO extends JpaRepository<Student, Integer> {
 //todo проверить!!!!
+
+    //not work without @Query
+
     @Query("from Student where e_isPresent=true")
-    List<Student> findAllisPresentTrue();
-//    List<Student> findAllisPresent();
+    List<Student> findAllisPresent();
+
 
     @Query("from Student where e_isPresent=false")
-    List<Student> findAllisPresentFalse();
-//    List<Student> findAllisNotPresent();
+    List<Student> findAllisNotPresent();
+
 
     @Query("from Student where e_isPresent=true AND l_isAnswer=true" )
     List<Student> findAllisPresentTrueAndAnswerTrue();

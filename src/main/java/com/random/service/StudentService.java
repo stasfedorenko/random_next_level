@@ -12,17 +12,12 @@ public interface StudentService {
 
     Student getStudent(int id);
 
-    void deleteStudent(int id);
-
     void saveStudent(Student student);
 
-    void saveStudents(List<Student> student);
-
-    int save();
 
     List<Student> getRandomStudents();
 
-    int getRandomId();
-
     List<Student> getAllStudents2();
+
+    void changeMark(int id,double f_mark,double g_ansMark, double k_qMark);
 }
