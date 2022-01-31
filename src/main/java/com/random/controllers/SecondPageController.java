@@ -18,7 +18,6 @@ import java.util.List;
 public class SecondPageController {
 
     StudentService studentService;
-    List<Student> allStudents = new ArrayList<>();
 //todo пеернести в сервис то, что нужно в сервис
 
     @Autowired
@@ -28,22 +27,14 @@ public class SecondPageController {
 
     @GetMapping("/studentsLesson")
     public String secondPage(Model model) {
-        List<Student> students = studentService.getAllStudents2();
-        String message = "Студенты закончились";
-        if (!students.isEmpty()) {
-            Student student = RandomHelper.randomId(students);
-            student.setL_isAnswer(true);
-            studentService.saveStudent(student);
-            allStudents.add(student);
-            message = "Еще остались студенты";
-        }
+        List<Student> allStudents = studentService.getAllStudents2();
         model.addAttribute("students", allStudents);
-        model.addAttribute("message", message);
         return "studentsOnLesson";
     }
 
     @GetMapping("/secondMainPage")
     public String secondMainPage( Model model) {
+        List<Student> allStudents = studentService.getRandomStudents();
         model.addAttribute("students", allStudents);
         return "studentsOnLesson";
     }
